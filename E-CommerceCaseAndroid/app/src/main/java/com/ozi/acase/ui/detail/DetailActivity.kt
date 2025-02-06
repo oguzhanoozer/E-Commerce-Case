@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.ozi.acase.data.model.Product
+import com.ozi.acase.data.viewModel.DetailViewModel
 import com.ozi.acase.databinding.ActivityDetailBinding
 import com.ozi.acase.extensions.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint

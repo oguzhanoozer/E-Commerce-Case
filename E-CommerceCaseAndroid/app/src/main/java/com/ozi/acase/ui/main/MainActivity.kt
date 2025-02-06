@@ -53,7 +53,6 @@ class GridSpacingItemDecoration(
         }
     }
 }
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -93,16 +92,39 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
+        // Başlangıçta loading göster, diğerlerini gizle
+        binding.progressBar.isVisible = true
+        binding.recyclerViewProducts.isVisible = false
+        binding.viewPagerSlider.isVisible = false
+        binding.textViewEmpty.isVisible = false
+
         viewModel.sliderProducts.observe(this) { products ->
-            products?.let { sliderAdapter.setItems(it) }
+            if (!products.isNullOrEmpty()) {
+                binding.viewPagerSlider.isVisible = true
+                sliderAdapter.setItems(products)
+            } else {
+                binding.viewPagerSlider.isVisible = false
+            }
         }
 
         viewModel.gridProducts.observe(this) { products ->
-            products?.let { productAdapter.setItems(it) }
+            if (!products.isNullOrEmpty()) {
+                binding.recyclerViewProducts.isVisible = true
+                binding.textViewEmpty.isVisible = false
+                productAdapter.setItems(products)
+            } else {
+                binding.recyclerViewProducts.isVisible = false
+                binding.textViewEmpty.isVisible = true
+            }
         }
 
         viewModel.loading.observe(this) { isLoading ->
             binding.progressBar.isVisible = isLoading
+            if (isLoading) {
+                binding.recyclerViewProducts.isVisible = false
+                binding.viewPagerSlider.isVisible = false
+                binding.textViewEmpty.isVisible = false
+            }
         }
 
         viewModel.error.observe(this) { errorMessage ->
@@ -115,7 +137,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun navigateToDetail(product: Product) {
         val intent = Intent(this, DetailActivity::class.java).apply {
