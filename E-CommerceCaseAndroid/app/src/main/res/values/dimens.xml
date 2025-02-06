@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">20dp</dimen>
+
+    <!-- Text Sizes -->
+    <dimen name="text_tiny">12sp</dimen>
+    <dimen name="text_small">14sp</dimen>
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_large">18sp</dimen>
+
+    <!-- Specific Dimensions -->
+    <dimen name="slider_height">160dp</dimen>
+    <dimen name="tab_layout_height">12dp</dimen>
+    <dimen name="tab_min_width">6dp</dimen>
+    <dimen name="tab_padding">3dp</dimen>
+    <dimen name="tab_padding_top">20dp</dimen>
+    <dimen name="tab_padding_bottom">20dp</dimen>
+    <dimen name="tab_padding_start">8dp</dimen>
+    <dimen name="tab_padding_end">3dp</dimen>
+
+    <!-- Card -->
+    <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_margin">4dp</dimen>
+
+    <!-- Icons -->
+    <dimen name="icon_size_small">14dp</dimen>
+
+    <!-- Detail -->
+    <dimen name="detail_image_height">240dp</dimen>
+    <dimen name="toolbar_height">?attr/actionBarSize</dimen>
+
+    <!-- Line Spacing -->
+    <dimen name="line_spacing">4dp</dimen>
+
+    <!-- Layout -->
+    <dimen name="width_percent">0.5</dimen>
+    <dimen name="elevation_none">0dp</dimen>
+</resources>

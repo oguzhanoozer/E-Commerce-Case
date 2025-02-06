@@ -49,6 +49,12 @@ class ProductAdapter(
 
     override fun getItemCount() = items.size
 
+    fun addItems(newItems: List<Product>) {
+        val startPosition = items.size
+        items.addAll(newItems)
+        notifyItemRangeInserted(startPosition, newItems.size)
+    }
+
     fun setItems(newItems: List<Product>) {
         items.clear()
         items.addAll(newItems)

@@ -29,6 +29,10 @@ class MainViewModel @Inject constructor(
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
 
+    private var currentPage = 1
+    private val pageSize = 20
+    private var isLoadingData = false
+
     init {
         loadData()
     }
@@ -39,7 +43,7 @@ class MainViewModel @Inject constructor(
 
             try {
                 val sliderDeferred = async { repository.getSliderProducts() }
-                val gridDeferred = async { repository.getAllProducts() }
+                val gridDeferred = async { repository.getProducts(1, pageSize) }
 
                 when (val sliderResult = sliderDeferred.await()) {
                     is Result.Success -> _sliderProducts.value = sliderResult.data
@@ -62,6 +66,35 @@ class MainViewModel @Inject constructor(
                 _gridProducts.value = null
             } finally {
                 _loading.value = false
+            }
+        }
+    }
+
+    fun loadMoreProducts() {
+        if (isLoadingData) return
+
+        viewModelScope.launch {
+            isLoadingData = true
+
+            try {
+                val offset = currentPage * pageSize
+                when (val result = repository.getProducts(offset, pageSize)) {
+                    is Result.Success -> {
+                        val oldList = _gridProducts.value ?: listOf()
+                        val newList = mutableListOf<Product>()
+                        newList.addAll(oldList)
+                        result.data?.let { newList.addAll(it) }
+                        _gridProducts.value = newList
+                        currentPage++
+                    }
+                    is Result.Error -> {
+                        _error.value = result.message
+                    }
+                }
+            } catch (e: Exception) {
+                _error.value = e.message ?: "An unexpected error occurred"
+            } finally {
+                isLoadingData = false
             }
         }
     }

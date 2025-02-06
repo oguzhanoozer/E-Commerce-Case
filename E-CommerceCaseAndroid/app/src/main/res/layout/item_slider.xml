@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="@dimen/spacing_medium">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/imageContainer"
@@ -12,7 +12,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.5">
+        app:layout_constraintWidth_percent="@dimen/width_percent">
 
         <ImageView
             android:id="@+id/imageViewSlider"
@@ -30,11 +30,11 @@
         android:id="@+id/textViewSliderTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/spacing_medium"
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="@dimen/text_tiny"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageContainer"
@@ -43,7 +43,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/spacing_medium"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,28 +55,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_small"
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/spacing_small"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
+                android:layout_width="@dimen/icon_size_small"
+                android:layout_height="@dimen/icon_size_small"
                 android:src="@drawable/ic_star" />
 
             <TextView
                 android:id="@+id/textViewSliderRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="@dimen/spacing_tiny"
                 android:textColor="#FFC107"
-                android:textSize="12sp" />
+                android:textSize="@dimen/text_tiny" />
 
         </LinearLayout>
     </LinearLayout>

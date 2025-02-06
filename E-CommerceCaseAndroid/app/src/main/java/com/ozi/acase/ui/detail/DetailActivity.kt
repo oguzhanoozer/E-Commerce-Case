@@ -10,6 +10,7 @@ import com.ozi.acase.data.model.Product
 import com.ozi.acase.data.viewModel.DetailViewModel
 import com.ozi.acase.databinding.ActivityDetailBinding
 import com.ozi.acase.extensions.showErrorDialog
+import com.ozi.acase.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,9 +55,9 @@ class DetailActivity : AppCompatActivity() {
         viewModel.error.observe(this) { errorMessage ->
             errorMessage?.let {
                 showErrorDialog(
-                    title = "Error",
+                    title = Constants.Dialog.ERROR_TITLE,
                     message = it,
-                    buttonText = "Close"
+                    buttonText = Constants.Dialog.BUTTON_CLOSE
                 ) {
                     navigateBack()
                 }

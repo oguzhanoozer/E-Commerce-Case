@@ -20,6 +20,7 @@ import android.graphics.Rect // Bu import'u ekleyin
 import android.view.View // Bu import'u ekleyin
 import androidx.recyclerview.widget.RecyclerView // Bu import'u ekleyin
 import com.ozi.acase.extensions.showErrorDialog
+import com.ozi.acase.utils.Constants
 
 class GridSpacingItemDecoration(
     private val spanCount: Int,
@@ -79,6 +80,34 @@ class MainActivity : AppCompatActivity() {
             layoutManager = GridLayoutManager(this@MainActivity, 2)
             adapter = productAdapter
             addItemDecoration(GridSpacingItemDecoration(2, 8, true))
+            isNestedScrollingEnabled = false
+
+
+            binding.recyclerViewProducts.apply {
+                layoutManager = GridLayoutManager(this@MainActivity, 2)
+                adapter = productAdapter
+                addItemDecoration(GridSpacingItemDecoration(2, 8, true))
+
+                addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        super.onScrolled(recyclerView, dx, dy)
+
+                        val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                        val visibleItemCount = layoutManager.childCount
+                        val totalItemCount = layoutManager.itemCount
+                        val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                        if (!binding.progressBar.isVisible) {
+                            if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                                && firstVisibleItemPosition >= 0
+                                && dy > 0
+                            ) {
+                                viewModel.loadMoreProducts()
+                            }
+                        }
+                    }
+                })
+            }
         }
     }
 
@@ -130,9 +159,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.error.observe(this) { errorMessage ->
             errorMessage?.let {
                 showErrorDialog(
-                    title = "Error",
+                    title = Constants.Dialog.ERROR_TITLE,
                     message = it,
-                    buttonText = "OK"
+                    buttonText = Constants.Dialog.BUTTON_OK
                 )
             }
         }
