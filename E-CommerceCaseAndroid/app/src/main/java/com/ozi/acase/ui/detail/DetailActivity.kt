@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.ozi.acase.data.model.Product
 import com.ozi.acase.databinding.ActivityDetailBinding
+import com.ozi.acase.extensions.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,16 +43,28 @@ class DetailActivity : AppCompatActivity() {
 
     private fun observeData() {
         viewModel.product.observe(this) { product ->
-            setupUI(product)
+            product?.let { setupUI(it) }
         }
 
         viewModel.loading.observe(this) { isLoading ->
             binding.progressBar.isVisible = isLoading
         }
 
-        viewModel.error.observe(this) { error ->
-            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+        viewModel.error.observe(this) { errorMessage ->
+            errorMessage?.let {
+                showErrorDialog(
+                    title = "Error",
+                    message = it,
+                    buttonText = "Close"
+                ) {
+                    navigateBack()
+                }
+            }
         }
+    }
+
+    private fun navigateBack() {
+        onBackPressed()
     }
 
     private fun setupUI(product: Product) {

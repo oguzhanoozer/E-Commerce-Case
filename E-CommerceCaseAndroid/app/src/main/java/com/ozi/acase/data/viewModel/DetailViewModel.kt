@@ -1,5 +1,3 @@
-
-// DetailViewModel.kt
 package com.ozi.acase.ui.detail
 
 import androidx.lifecycle.LiveData

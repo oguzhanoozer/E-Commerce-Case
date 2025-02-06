@@ -1,4 +1,3 @@
-// CaseApplication.kt
 package com.ozi.acase
 
 import android.app.Application

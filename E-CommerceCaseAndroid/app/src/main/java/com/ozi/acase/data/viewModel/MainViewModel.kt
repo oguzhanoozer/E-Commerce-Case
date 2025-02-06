@@ -1,4 +1,3 @@
-// MainViewModel.kt
 package com.ozi.acase.ui.main
 
 import androidx.lifecycle.LiveData

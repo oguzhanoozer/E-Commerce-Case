@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import android.graphics.Rect // Bu import'u ekleyin
 import android.view.View // Bu import'u ekleyin
 import androidx.recyclerview.widget.RecyclerView // Bu import'u ekleyin
+import com.ozi.acase.extensions.showErrorDialog
 
 class GridSpacingItemDecoration(
     private val spanCount: Int,
@@ -57,7 +58,6 @@ class GridSpacingItemDecoration(
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
-    // ... geri kalan kod aynı
     private lateinit var productAdapter: ProductAdapter
     private lateinit var sliderAdapter: SliderAdapter
 
@@ -94,19 +94,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeData() {
         viewModel.sliderProducts.observe(this) { products ->
-            sliderAdapter.setItems(products)
+            products?.let { sliderAdapter.setItems(it) }
         }
 
         viewModel.gridProducts.observe(this) { products ->
-            productAdapter.setItems(products)
+            products?.let { productAdapter.setItems(it) }
         }
 
         viewModel.loading.observe(this) { isLoading ->
             binding.progressBar.isVisible = isLoading
         }
 
-        viewModel.error.observe(this) { error ->
-            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+        viewModel.error.observe(this) { errorMessage ->
+            errorMessage?.let {
+                showErrorDialog(
+                    title = "Error",
+                    message = it,
+                    buttonText = "OK"
+                )
+            }
         }
     }
 

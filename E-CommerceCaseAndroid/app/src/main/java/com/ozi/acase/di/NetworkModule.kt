@@ -1,7 +1,10 @@
-// NetworkModule.kt
+// di/NetworkModule.kt
 package com.ozi.acase.di
 
-import com.ozi.acase.data.api.ApiService
+import com.ozi.acase.data.repository.ProductRepository
+import com.ozi.acase.data.service.api.ApiService
+import com.ozi.acase.data.service.base.BaseService
+import com.ozi.acase.utils.Constants.Api
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,16 +32,20 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl("https://fakestoreapi.com/")
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        return try {
+            Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        } catch (e: Exception) {
+            throw RuntimeException("API configuration error: ${e.message}")
+        }
     }
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiService {
+    fun provideApiService(retrofit: Retrofit): BaseService {
         return retrofit.create(ApiService::class.java)
     }
 }
