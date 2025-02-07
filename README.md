@@ -78,109 +78,84 @@ Running Tests
 </li>
 
 ## API
-<ul>
-<li>The project uses Fake Store API:</li>
-<li>Base URL: https://fakestoreapi.com</li>
-<li>Endpoints:</li>
-<li>/products - Product list</li>
-<li>/products/{id} - Product detail</li>
-</ul>
+The project uses Fake Store API:
+- Base URL: https://fakestoreapi.com
+- Endpoints:
+  - /products - Product list
+  - /products/{id} - Product detail
 
 ### Note About API Security
 For this case study, API paths and endpoints are exposed in the codebase.
 
 ## Architecture Overview
-<ul>
-<li>data: Core data handling with adapters, API services, models and repository</li>
-<li>di: Dependency injection modules with Hilt</li>
-<li>extension: Kotlin extensions for UI components</li>
-<li>ui: Activities and UI related components</li>
-<li>utils: Helper classes and constants</li>
-</ul>
+- data: Core data handling with adapters, API services, models and repository
+- di: Dependency injection modules with Hilt
+- extension: Kotlin extensions for UI components
+- ui: Activities and UI related components
+- utils: Helper classes and constants
 
 ## Implementation Details
 Built with a focus on clean architecture and testability:
-<ul>
-  <li>NetworkManager for handling API requests and responses</li>
- <li>Pagination implementation for efficient data loading</li>
- <li>Constants management for maintainable codebase</li>
- <li>Clean code practices with minimal comments</li>
- <li>Mock Service structure for reliable testing</li>
- <li>Unit tests for repository layer</li>
-</ul>
+- NetworkManager for handling API requests and responses
+- Pagination implementation for efficient data loading
+- Constants management for maintainable codebase
+- Clean code practices with minimal comments
+- Mock Service structure for reliable testing
+- Unit tests for repository layer
 
 ## Future Improvements
 The app can be enhanced with:
-</ul>
- <li>Advanced caching with Room Database</li>
- <li>Improved loading states with shimmer effects</li>
- <li>Paging 3 library implementation</li>
- <li>Better error handling and retry mechanisms</li>
- <li>Enhanced UI/UX for loading and error states</li>
- <ul>
+- Advanced caching with Room Database
+- Improved loading states with shimmer effects
+- Paging 3 library implementation
+- Better error handling and retry mechanisms
+- Enhanced UI/UX for loading and error states
    
 These improvements would optimize performance and user experience while maintaining clean architecture.
 
 ## Features
-<ul>
-  <li>Product listing with pagination</li>
-  <li>Product detail view</li>
-  <li>Slider for featured products</li>
-</ul>
+- Product listing with pagination
+- Product detail view
+- Slider for featured products
 
 ## Tech Stack & Libraries
-<ul>
-  <li>100% Kotlin</li>
-  <li>MVVM Architecture</li>
-  <li>Jetpack Components</li>
-  <ul>
-      <li>ViewModel</li>
-      <li>LiveData</li>
-      <li>ViewBinding</li>
-  </ul>
-  <li>Dependency Injection with Hilt</li>
-  <li>Retrofit for networking</li>
-  <li>Glide for image loading</li>
-  <li>Unit Testing with JUnit & Mock</li>
-</ul>
+- 100% Kotlin
+- MVVM Architecture
+- Jetpack Components
+  - ViewModel
+  - LiveData
+  - ViewBinding
+- Dependency Injection with Hilt
+- Retrofit for networking
+- Glide for image loading
+- Unit Testing with JUnit & Mock
 
 ## Architecture
 The app follows MVVM architecture pattern:
-<ul>
-  <li>Model: Handles data operations</li>
-  <li>View: XML layouts and Activities/Fragments</li>
-  <li>ViewModel: Manages UI-related data and business logic</li>
-</ul>
+- Model: Handles data operations
+- View: XML layouts and Activities/Fragments
+- ViewModel: Manages UI-related data and business logic
 
 ## Network Layer
-<ul>
-  <li>Retrofit for API calls</li>
-  <li>Custom NetworkManager for handling responses</li>
-  <li>Error handling with Result wrapper</li>
-  <li>Pagination implementation for product listing</li>
-</ul>
+- Retrofit for API calls
+- Custom NetworkManager for handling responses
+- Error handling with Result wrapper
+- Pagination implementation for product listing
 
 ## Testing
-<ul>
-  <li>Unit tests for Repository layer</li>
-  <li>Mock responses for API calls</li>
-  <li>Test coverage for business logic</li>
-</ul>
+- Unit tests for Repository layer
+- Mock responses for API calls
+- Test coverage for business logic
 
 ## Setup
-<ul>
-  <li>Clone the repository</li>
-  <li>Open project in Android Studio</li>
-  <li>Run the app</li>
-</ul>
-
+- Clone the repository
+- Open project in Android Studio
+- Run the app
 
 ## Requirements
-<ul>
-  <li>Android Studio Arctic Fox or newer</li>
-  <li>Minimum SDK 24</li>
-  <li>Target SDK 33</li>
-  <li>Kotlin 1.8.0</li>
-</ul>
+- Android Studio Arctic Fox or newer
+- Minimum SDK 24
+- Target SDK 33
+- Kotlin 1.8.0
 
 
