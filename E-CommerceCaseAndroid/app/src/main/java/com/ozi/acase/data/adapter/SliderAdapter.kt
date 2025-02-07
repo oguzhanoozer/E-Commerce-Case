@@ -19,20 +19,18 @@ class SliderAdapter(
         fun bind(product: Product) {
             binding.apply {
                 textViewSliderTitle.text = product.title
+                textViewSliderCategory.text = product.category
                 textViewSliderPrice.text = "$ ${product.price}"
 
-                // Rating
                 val ratingText = "${product.rating.rate} (${product.rating.count})"
                 textViewSliderRating.text = ratingText
                 textViewSliderRating.setTextColor(itemView.context.getColor(android.R.color.holo_orange_light))
 
-                // Image
                 Glide.with(itemView.context)
                     .load(product.image)
                     .fitCenter()
                     .into(imageViewSlider)
 
-                // Click listener
                 root.setOnClickListener {
                     onItemClick(product)
                 }

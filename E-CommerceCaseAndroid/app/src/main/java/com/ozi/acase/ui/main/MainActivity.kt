@@ -2,8 +2,7 @@ package com.ozi.acase.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.viewModels // Bu import'u ekleyin
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,10 +15,11 @@ import com.ozi.acase.ui.detail.DetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
-import android.graphics.Rect // Bu import'u ekleyin
-import android.view.View // Bu import'u ekleyin
-import androidx.recyclerview.widget.RecyclerView // Bu import'u ekleyin
+import android.graphics.Rect
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.ozi.acase.extensions.showErrorDialog
+import com.ozi.acase.utils.Constants
 
 class GridSpacingItemDecoration(
     private val spanCount: Int,
@@ -33,27 +33,26 @@ class GridSpacingItemDecoration(
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        val position = parent.getChildAdapterPosition(view) // item position
-        val column = position % spanCount // item column
+        val position = parent.getChildAdapterPosition(view)
+        val column = position % spanCount
 
         if (includeEdge) {
             outRect.left = spacing - column * spacing / spanCount
             outRect.right = (column + 1) * spacing / spanCount
 
-            if (position < spanCount) { // top edge
+            if (position < spanCount) {
                 outRect.top = spacing
             }
-            outRect.bottom = spacing // item bottom
+            outRect.bottom = spacing
         } else {
             outRect.left = column * spacing / spanCount
             outRect.right = spacing - (column + 1) * spacing / spanCount
             if (position >= spanCount) {
-                outRect.top = spacing // item top
+                outRect.top = spacing
             }
         }
     }
 }
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -80,6 +79,34 @@ class MainActivity : AppCompatActivity() {
             layoutManager = GridLayoutManager(this@MainActivity, 2)
             adapter = productAdapter
             addItemDecoration(GridSpacingItemDecoration(2, 8, true))
+            isNestedScrollingEnabled = false
+
+
+            binding.recyclerViewProducts.apply {
+                layoutManager = GridLayoutManager(this@MainActivity, 2)
+                adapter = productAdapter
+                addItemDecoration(GridSpacingItemDecoration(2, 8, true))
+
+                addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        super.onScrolled(recyclerView, dx, dy)
+
+                        val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                        val visibleItemCount = layoutManager.childCount
+                        val totalItemCount = layoutManager.itemCount
+                        val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                        if (!binding.progressBar.isVisible) {
+                            if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                                && firstVisibleItemPosition >= 0
+                                && dy > 0
+                            ) {
+                                viewModel.loadMoreProducts()
+                            }
+                        }
+                    }
+                })
+            }
         }
     }
 
@@ -93,29 +120,50 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
+        binding.progressBar.isVisible = true
+        binding.recyclerViewProducts.isVisible = false
+        binding.viewPagerSlider.isVisible = false
+        binding.textViewEmpty.isVisible = false
+
         viewModel.sliderProducts.observe(this) { products ->
-            products?.let { sliderAdapter.setItems(it) }
+            if (!products.isNullOrEmpty()) {
+                binding.viewPagerSlider.isVisible = true
+                sliderAdapter.setItems(products)
+            } else {
+                binding.viewPagerSlider.isVisible = false
+            }
         }
 
         viewModel.gridProducts.observe(this) { products ->
-            products?.let { productAdapter.setItems(it) }
+            if (!products.isNullOrEmpty()) {
+                binding.recyclerViewProducts.isVisible = true
+                binding.textViewEmpty.isVisible = false
+                productAdapter.setItems(products)
+            } else {
+                binding.recyclerViewProducts.isVisible = false
+                binding.textViewEmpty.isVisible = true
+            }
         }
 
         viewModel.loading.observe(this) { isLoading ->
             binding.progressBar.isVisible = isLoading
+            if (isLoading) {
+                binding.recyclerViewProducts.isVisible = false
+                binding.viewPagerSlider.isVisible = false
+                binding.textViewEmpty.isVisible = false
+            }
         }
 
         viewModel.error.observe(this) { errorMessage ->
             errorMessage?.let {
                 showErrorDialog(
-                    title = "Error",
+                    title = Constants.Dialog.ERROR_TITLE,
                     message = it,
-                    buttonText = "OK"
+                    buttonText = Constants.Dialog.BUTTON_OK
                 )
             }
         }
     }
-
 
     private fun navigateToDetail(product: Product) {
         val intent = Intent(this, DetailActivity::class.java).apply {

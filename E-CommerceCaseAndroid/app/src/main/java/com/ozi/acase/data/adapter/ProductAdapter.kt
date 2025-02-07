@@ -26,7 +26,6 @@ class ProductAdapter(
                     .fitCenter()
                     .into(imageViewProduct)
 
-                // CardView'a tıklama olayı ekleyelim
                 root.setOnClickListener {
                     onItemClick(product)
                 }
@@ -48,6 +47,12 @@ class ProductAdapter(
     }
 
     override fun getItemCount() = items.size
+
+    fun addItems(newItems: List<Product>) {
+        val startPosition = items.size
+        items.addAll(newItems)
+        notifyItemRangeInserted(startPosition, newItems.size)
+    }
 
     fun setItems(newItems: List<Product>) {
         items.clear()

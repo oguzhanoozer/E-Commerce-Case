@@ -8,7 +8,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:elevation="0dp"
         app:navigationIcon="@drawable/ic_back"
@@ -27,37 +27,37 @@
             <ImageView
                 android:id="@+id/imageViewDetail"
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:padding="16dp"
+                android:layout_height="@dimen/detail_image_height"
+                android:padding="@dimen/spacing_medium"
                 android:scaleType="fitCenter" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="@dimen/spacing_medium">
 
                 <TextView
                     android:id="@+id/textViewDetailTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/text_medium"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textViewDetailCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/spacing_small"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_small"
                     android:textStyle="italic" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="@dimen/spacing_small">
 
                     <TextView
                         android:id="@+id/textViewDetailPrice"
@@ -66,7 +66,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:textColor="@android:color/holo_red_dark"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/text_large"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -78,17 +78,17 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="14dp"
-                            android:layout_height="14dp"
+                            android:layout_width="@dimen/icon_size_small"
+                            android:layout_height="@dimen/icon_size_small"
                             android:src="@drawable/ic_star" />
 
                         <TextView
                             android:id="@+id/textViewDetailRating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
+                            android:layout_marginStart="@dimen/spacing_tiny"
                             android:textColor="#FFC107"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/text_tiny" />
                     </LinearLayout>
                 </RelativeLayout>
 
@@ -96,9 +96,9 @@
                     android:id="@+id/textViewDetailDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:lineSpacingExtra="4dp"
-                    android:textSize="14sp" />
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:lineSpacingExtra="@dimen/line_spacing"
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
         </LinearLayout>

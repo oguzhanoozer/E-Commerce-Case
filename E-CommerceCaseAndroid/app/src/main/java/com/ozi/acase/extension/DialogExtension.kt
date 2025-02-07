@@ -1,4 +1,3 @@
-// extensions/DialogExtension.kt
 package com.ozi.acase.extensions
 
 import android.app.AlertDialog
