@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ozi.acase.data.model.Product
 import com.ozi.acase.data.repository.ProductRepository
+import com.ozi.acase.utils.Constants
 import com.ozi.acase.utils.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
@@ -61,7 +62,7 @@ class MainViewModel @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
-                _error.value = e.message ?: "An unexpected error occurred"
+                _error.value = e.message ?: Constants.ErrorMessages.GENERAL_ERROR
                 _sliderProducts.value = null
                 _gridProducts.value = null
             } finally {
@@ -92,7 +93,7 @@ class MainViewModel @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
-                _error.value = e.message ?: "An unexpected error occurred"
+                _error.value = e.message ?: Constants.ErrorMessages.GENERAL_ERROR
             } finally {
                 isLoadingData = false
             }

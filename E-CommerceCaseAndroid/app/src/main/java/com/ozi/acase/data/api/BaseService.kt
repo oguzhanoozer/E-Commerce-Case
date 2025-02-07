@@ -1,4 +1,3 @@
-// data/service/base/BaseService.kt
 package com.ozi.acase.data.service.base
 
 import com.ozi.acase.data.model.Product

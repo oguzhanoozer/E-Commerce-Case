@@ -2,8 +2,7 @@ package com.ozi.acase.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.viewModels // Bu import'u ekleyin
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,9 +15,9 @@ import com.ozi.acase.ui.detail.DetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
-import android.graphics.Rect // Bu import'u ekleyin
-import android.view.View // Bu import'u ekleyin
-import androidx.recyclerview.widget.RecyclerView // Bu import'u ekleyin
+import android.graphics.Rect
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.ozi.acase.extensions.showErrorDialog
 import com.ozi.acase.utils.Constants
 
@@ -34,22 +33,22 @@ class GridSpacingItemDecoration(
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        val position = parent.getChildAdapterPosition(view) // item position
-        val column = position % spanCount // item column
+        val position = parent.getChildAdapterPosition(view)
+        val column = position % spanCount
 
         if (includeEdge) {
             outRect.left = spacing - column * spacing / spanCount
             outRect.right = (column + 1) * spacing / spanCount
 
-            if (position < spanCount) { // top edge
+            if (position < spanCount) {
                 outRect.top = spacing
             }
-            outRect.bottom = spacing // item bottom
+            outRect.bottom = spacing
         } else {
             outRect.left = column * spacing / spanCount
             outRect.right = spacing - (column + 1) * spacing / spanCount
             if (position >= spanCount) {
-                outRect.top = spacing // item top
+                outRect.top = spacing
             }
         }
     }
@@ -121,7 +120,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-        // Başlangıçta loading göster, diğerlerini gizle
         binding.progressBar.isVisible = true
         binding.recyclerViewProducts.isVisible = false
         binding.viewPagerSlider.isVisible = false

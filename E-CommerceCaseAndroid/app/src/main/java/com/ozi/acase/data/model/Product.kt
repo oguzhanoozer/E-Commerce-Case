@@ -1,7 +1,4 @@
 package com.ozi.acase.data.model
-
-import com.google.gson.annotations.SerializedName
-
 data class Product(
     val id: Int,
     val title: String,

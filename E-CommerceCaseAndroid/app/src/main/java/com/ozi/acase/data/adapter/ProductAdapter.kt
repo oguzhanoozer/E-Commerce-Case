@@ -26,7 +26,6 @@ class ProductAdapter(
                     .fitCenter()
                     .into(imageViewProduct)
 
-                // CardView'a tıklama olayı ekleyelim
                 root.setOnClickListener {
                     onItemClick(product)
                 }

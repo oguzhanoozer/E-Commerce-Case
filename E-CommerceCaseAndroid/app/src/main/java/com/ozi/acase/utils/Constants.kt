@@ -1,4 +1,3 @@
-// utils/Constants.kt
 package com.ozi.acase.utils
 
 object Constants {
@@ -12,6 +11,7 @@ object Constants {
         const val PRODUCTS_LOAD = "Could not load products. Please try again."
         const val PRODUCT_DETAILS_LOAD = "Could not load product details. Please try again."
         const val SLIDER_PRODUCTS_LOAD = "Could not load slider products. Please try again."
+        const val GENERAL_ERROR = "An unexpected error occurred"
     }
 
     object Dialog {

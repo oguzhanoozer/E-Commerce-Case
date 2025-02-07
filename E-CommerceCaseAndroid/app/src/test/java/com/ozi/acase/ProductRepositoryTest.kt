@@ -27,10 +27,8 @@ class ProductRepositoryTest {
 
     @Test
     fun `test get all products`() = runTest {
-        // When
         val result = repository.getProducts(1, 5)
 
-        // Then
         assertNotNull(result)
         when (result) {
             is Result.Success -> {
@@ -47,10 +45,8 @@ class ProductRepositoryTest {
 
     @Test
     fun `test get products second page`() = runTest {
-        // When
         val result = repository.getProducts(2, 5)
 
-        // Then
         assertNotNull(result)
         when (result) {
             is Result.Success -> {
@@ -66,10 +62,8 @@ class ProductRepositoryTest {
 
     @Test
     fun `test get slider products`() = runTest {
-        // When
         val result = repository.getSliderProducts()
 
-        // Then
         assertNotNull(result)
         when (result) {
             is Result.Success -> {
@@ -84,13 +78,10 @@ class ProductRepositoryTest {
 
     @Test
     fun `test get product detail`() = runTest {
-        // Given
         val productId = 5
 
-        // When
         val result = repository.getProductDetail(productId)
 
-        // Then
         assertNotNull(result)
         when (result) {
             is Result.Success -> {
@@ -105,42 +96,33 @@ class ProductRepositoryTest {
 
     @Test
     fun `test get products error`() = runTest {
-        // Given
         mockService = MockService(shouldFail = true)
         repository = ProductRepository(mockService)
 
-        // When
         val result = repository.getProducts(1, 5)
 
-        // Then
         assertTrue(result is Result.Error)
         assertEquals(Constants.ErrorMessages.PRODUCTS_LOAD, (result as Result.Error).message)
     }
 
     @Test
     fun `test get slider products error`() = runTest {
-        // Given
         mockService = MockService(shouldFail = true)
         repository = ProductRepository(mockService)
 
-        // When
         val result = repository.getSliderProducts()
 
-        // Then
         assertTrue(result is Result.Error)
         assertEquals(Constants.ErrorMessages.SLIDER_PRODUCTS_LOAD, (result as Result.Error).message)
     }
 
     @Test
     fun `test get product detail error`() = runTest {
-        // Given
         mockService = MockService(shouldFail = true)
         repository = ProductRepository(mockService)
 
-        // When
         val result = repository.getProductDetail(5)
 
-        // Then
         assertTrue(result is Result.Error)
         assertEquals(Constants.ErrorMessages.PRODUCT_DETAILS_LOAD, (result as Result.Error).message)
     }

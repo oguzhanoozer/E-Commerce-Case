@@ -1,5 +1,4 @@
 package com.ozi.acase.utils
-// utils/Result.kt
 
 sealed class Result<out T> {
     data class Success<out T>(val data: T?) : Result<T>()
