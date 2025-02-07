@@ -35,6 +35,12 @@ com.ozi.acase/
     └── Result
 ```
 
+## Requirements
+- Android Studio Arctic Fox or newer
+- Minimum SDK 24
+- Target SDK 33
+- Kotlin 1.8.0
+
 # Installation
 <ul>
   <li>
@@ -151,11 +157,5 @@ The app follows MVVM architecture pattern:
 - Clone the repository
 - Open project in Android Studio
 - Run the app
-
-## Requirements
-- Android Studio Arctic Fox or newer
-- Minimum SDK 24
-- Target SDK 33
-- Kotlin 1.8.0
 
 
